@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ProdutoRepository } from "./produto.repository.js";
-import type { IProduct, IProductRequestBody } from "./product.types.js";
+import { CriaProdutoDTO } from "./dto/CriaProduto.dto.js";
 
 @Controller('/produtos')
 export class ProdutoController {
@@ -8,13 +8,8 @@ export class ProdutoController {
 
 
   @Post()
-  async criarProduto(@Body() requestBody: IProductRequestBody) {
-    const productToSave: IProduct = {
-      ...requestBody,
-      dataAtualizacao: new Date().toISOString(),
-      dataCriacao: new Date().toISOString()
-    }
-    const repositoryResponse = await this.produtosRepository.salvar(productToSave)
+  async criarProduto(@Body() requestBody: CriaProdutoDTO) {
+    const repositoryResponse = await this.produtosRepository.salvar(requestBody)
     return repositoryResponse
   }
 

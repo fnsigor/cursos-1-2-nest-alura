@@ -2,9 +2,9 @@ POST http://localhost:3000/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Luffy",
-    "email": "monkeydluffy@gmail.com",
-    "senha": "123456"
+    "nome": "Robin",
+    "email": "robin@gmail.com",
+    "senha": "8544"
 
 }
 
@@ -13,6 +13,10 @@ Content-Type: application/json
 
 GET http://localhost:3000/usuarios
 Content-Type: application/json
+###
+
+GET http://localhost:3000/usuarios/a
+Content-Type: application/json
 
 ###
 
@@ -20,10 +24,9 @@ POST http://localhost:3000/produtos
 Content-Type: application/json
 
 {
-    "nome": "batata",
+    "nome": "boneco",
     "categoria": "fruta",
-    "valor": 4545454
-
+    "valor": 10
 }
 
 ###

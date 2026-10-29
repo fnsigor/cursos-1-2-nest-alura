@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
-import type { IUsuario } from "./usuario.types.js";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository.js";
+import { criaUsuarioSchema, type CriaUsuarioDTO } from "./dto/CriaUsuario.dto.js";
+import { ZodValidationPipe } from "../lib/zod.js";
+
 
 
 @Controller('/usuarios')
@@ -12,7 +14,8 @@ export class UsuarioController {
   }
 
   @Post()
-  async criaUsuario(@Body() dadosDoUsuario: IUsuario) {
+  @UsePipes(new ZodValidationPipe(criaUsuarioSchema))
+  async criaUsuario(@Body() dadosDoUsuario: CriaUsuarioDTO) {
     const response = await this.usuarioRepository.salvar(dadosDoUsuario)
     return response
   }
@@ -20,6 +23,11 @@ export class UsuarioController {
 
   @Get()
   async listarUsuarios() {
+    const response = await this.usuarioRepository.listar()
+    return { usuarios: response }
+  }
+  @Get(':id')
+  async listarUsuariosId(@Param('id', ParseIntPipe) id: number) {
     const response = await this.usuarioRepository.listar()
     return { usuarios: response }
   }
