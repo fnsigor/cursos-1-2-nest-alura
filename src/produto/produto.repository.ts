@@ -14,4 +14,13 @@ export class ProdutoRepository {
     return this.produtos
   }
 
+  async buscaCategoria(categoria: string): Promise<string | null> {
+    const categoriasDeProdutosCadastrados: string[] = this.produtos.map(p => p.categoria)
+    const categoriaNaLista = categoriasDeProdutosCadastrados.find(categoriaCadastrada => categoriaCadastrada === categoria)
+
+    if (categoriaNaLista) return categoriaNaLista
+
+    return null
+  }
+
 }

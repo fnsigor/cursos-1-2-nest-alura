@@ -24,9 +24,21 @@ POST http://localhost:3000/produtos
 Content-Type: application/json
 
 {
-    "nome": "boneco",
-    "categoria": "fruta",
-    "valor": 10
+    "nome": "Teclado Mecânico RGB",
+    "valor": 349.90,
+    "quantidade": 25,
+    "descricao": "Teclado mecânico gamer com iluminação RGB, switches azuis e layout ABNT2.",
+    "caracteristicas": [
+        { "nome": "Switch", "descricao": "Switch mecânico azul com feedback tátil e sonoro" },
+        { "nome": "Iluminação", "descricao": "Retroiluminação RGB com 16 milhões de cores" },
+        { "nome": "Layout", "descricao": "Layout ABNT2 com acentuação em português" }
+    ],
+    "imagens": [
+        { "url": "https://exemplo.com/imagens/teclado-frente.jpg", "descricao": "Foto frontal do teclado" },
+        { "url": "https://exemplo.com/imagens/teclado-lado.jpg", "descricao": "Foto lateral do teclado" }
+    ],
+    "categoria": "Teclados Gamer",
+    "usuarioId": "7e543348-0929-4752-976d-31c221725691"
 }
 
 ###

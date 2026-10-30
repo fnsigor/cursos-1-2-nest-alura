@@ -6,10 +6,12 @@ import {
   IsNumber,
   IsString,
   IsUrl,
+  IsUUID,
   MaxLength,
   Min,
   ValidateNested,
 } from 'class-validator';
+import { CategoriaUnica } from '../validacao/categoria-unica.validator.js';
 
 export class CaracteristicaProdutoDTO {
   @IsString()
@@ -63,5 +65,9 @@ export class CriaProdutoDTO {
 
   @IsString()
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })
+  @CategoriaUnica({ message: 'Já existe produto com essa categoria' })
   categoria: string;
+
+  @IsUUID(undefined, { message: 'ID de usuário inválido' })
+  usuarioId: string;
 }
