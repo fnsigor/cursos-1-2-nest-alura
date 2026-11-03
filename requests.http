@@ -2,7 +2,7 @@ POST http://localhost:3000/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Robin",
+    "nome": "Chopper",
     "email": "robin@gmail.com",
     "senha": "8544"
 
@@ -14,6 +14,28 @@ Content-Type: application/json
 GET http://localhost:3000/usuarios
 Content-Type: application/json
 ###
+
+
+
+PUT http://localhost:3000/usuarios/d18dacad-f487-4ec3-b0d8-097a1cbeabde
+Content-Type: application/json
+
+{
+    "nome": "Nami",
+    "email": "namiswan@gmail.com"
+
+}
+
+
+###
+
+
+DELETE  http://localhost:3000/usuarios/4028adfc-9309-4337-8137-67b42b5ab479
+Content-Type: application/json
+
+###
+
+
 
 GET http://localhost:3000/usuarios/a
 Content-Type: application/json

@@ -1,26 +1,47 @@
-import { Injectable } from "@nestjs/common";
-import { CriaProdutoDTO } from "./dto/CriaProduto.dto.js";
+import { Injectable } from '@nestjs/common';
+import { ProdutoEntity } from './produto.entity.js';
 
 @Injectable()
+
+
 export class ProdutoRepository {
-  private produtos: CriaProdutoDTO[] = []
+  private produtos: ProdutoEntity[] = [];
 
-  async salvar(produto: CriaProdutoDTO) {
-    this.produtos.push(produto)
-    return `Produto criado com sucesso`
+  listaTodos() {
+    return this.produtos;
   }
 
-  async listar() {
-    return this.produtos
+  salva(dadosProduto: ProdutoEntity) {
+    this.produtos.push(dadosProduto);
+    return dadosProduto;
   }
 
-  async buscaCategoria(categoria: string): Promise<string | null> {
-    const categoriasDeProdutosCadastrados: string[] = this.produtos.map(p => p.categoria)
-    const categoriaNaLista = categoriasDeProdutosCadastrados.find(categoriaCadastrada => categoriaCadastrada === categoria)
+  private buscaPorId(id: string) {
+    const possivelProduto = this.produtos.find((produto) => produto.id === id);
 
-    if (categoriaNaLista) return categoriaNaLista
+    if (!possivelProduto) {
+      throw new Error('Produto não existe');
+    }
 
-    return null
+    return possivelProduto;
   }
 
+  async atualiza(id: string, dadosProduto: Partial<ProdutoEntity>) {
+    const dadosNaoAtualizaveis = ['id', 'usuarioId'];
+    const produto = this.buscaPorId(id);
+    Object.entries(dadosProduto).forEach(([chave, valor]) => {
+      if (dadosNaoAtualizaveis.includes(chave)) {
+        return;
+      }
+      produto[chave] = valor;
+    });
+
+    return produto;
+  }
+
+  async remove(id: string) {
+    const produtoRemovido = this.buscaPorId(id);
+    this.produtos = this.produtos.filter((produto) => produto.id !== id);
+    return produtoRemovido;
+  }
 }
