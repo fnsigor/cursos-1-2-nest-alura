@@ -25,23 +25,32 @@ export class ProdutoRepository {
 
     return possivelProduto;
   }
-
   async atualiza(id: string, dadosProduto: Partial<ProdutoEntity>) {
     const dadosNaoAtualizaveis = ['id', 'usuarioId'];
+
     const produto = this.buscaPorId(id);
-    Object.entries(dadosProduto).forEach(([chave, valor]) => {
-      if (dadosNaoAtualizaveis.includes(chave)) {
-        return;
-      }
-      produto[chave] = valor;
-    });
+
+    const dadosAtualizaveis = Object.fromEntries(
+      Object.entries(dadosProduto).filter(
+        ([chave]) => !dadosNaoAtualizaveis.includes(chave),
+      ),
+    );
+
+    Object.assign(produto, dadosAtualizaveis);
 
     return produto;
   }
-
   async remove(id: string) {
     const produtoRemovido = this.buscaPorId(id);
     this.produtos = this.produtos.filter((produto) => produto.id !== id);
     return produtoRemovido;
+  }
+
+
+  async buscaCategoria(nomeCategoria: string) {
+    const listaDeCategorias: string[] = this.produtos.map(p => p.categoria)
+    const categoria = listaDeCategorias.find((categoriaNaLista) => categoriaNaLista === nomeCategoria);
+    if (!categoria) return null
+    return categoria
   }
 }
