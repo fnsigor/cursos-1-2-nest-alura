@@ -1,0 +1,9 @@
+aprendizados:
+
+Aprendemos a criar um projeto, como criar um controller, como definir qual método HTTP nossa rota vai tratar, se é um GET, se é um POST, quais dados virão no POST.
+
+Aprendemos a criação de DTOs e como usá-los para validar a entrada de dados. Para essas validações usamos o class validator e o class transformer para validar e transforma um JSON que recebemos em um objeto de uma classe.
+
+Além disso, vimos como criar nosso próprio decorator para criar uma validação customizada.
+
+Aprendemos sobre pipes para validar e transformar as informações de acordo com o que precisávamos na nossa aplicação.
