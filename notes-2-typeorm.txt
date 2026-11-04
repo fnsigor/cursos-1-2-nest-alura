@@ -1,0 +1,38 @@
+DATASOURCE:
+
+O QUE É:
+- interação com o banco de dados
+- mantem e cuida da conexao com o banco
+- estabelece conexao com o banco
+- uma aplicação pode manter varias conexoes
+
+O Datasource mantém e cuida da conexão com o banco de dados, ou seja, armazena os dados e estabelece conexões com o banco.
+
+
+
+nesse app, o datasource é o postgress
+
+
+-----------------------------------------
+
+Padroes de acesso ao dado:
+
+O que é:
+
+- refere a como a aplicação se comunicará com o banco para pegar, alterar ou deletar um dado.
+
+Padroes:
+
+- ActiveRecord:
+  - metodos de consulta ficam dentro da entity: a entidade já possui mapeamento relacional no formato de objeto. Todos os padroes de consulta ao banco ficam nessa mesma classe
+  - responsabilidades misturadas
+
+
+- RepositoryPattern
+ - separação de responsabilidade
+ - entidades apenas com mapeamento
+ - repository apenas vai no banco fazer as queries
+ - facilita futuras manutenções
+
+
+
