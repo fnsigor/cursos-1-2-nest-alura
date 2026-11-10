@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common';
+import { StandardSchemaValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 
 async function bootstrap() {
@@ -13,7 +14,8 @@ async function bootstrap() {
       //ignora (oui não) no json tudo o que não estiver na classe DTO
       //se for true, propriedades extras disparam erro
       forbidNonWhitelisted: true
-    })
+    }),
+    new StandardSchemaValidationPipe()
   )
 
   /*

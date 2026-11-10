@@ -1,25 +1,32 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository.js";
 import { criaUsuarioSchema, type CriaUsuarioDTO } from "./dto/CriaUsuario.dto.js";
-import { ZodValidationPipe } from "../lib/zod.js";
 import { UsuarioEntity } from "./usuario.entity.js";
 import { randomUUID } from "crypto";
 import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto.js";
 import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto.js";
-
+import { UsuarioService } from "./usuario.service.js";
 
 
 @Controller('/usuarios')
 export class UsuarioController {
 
 
-  constructor(private usuarioRepository: UsuarioRepository) {
+  constructor(
+    // private usuarioRepository: UsuarioRepository,
+    private usuarioService: UsuarioService
+  ) {
 
   }
 
+  // @Get(':id')
+  // async listarUsuariosId(@Param('id', ParseIntPipe) id: number) {
+  //   const response = await this.usuarioRepository.listar()
+  //   return { usuarios: response }
+  // }
+
   @Post()
-  @UsePipes(new ZodValidationPipe(criaUsuarioSchema))
-  async criaUsuario(@Body() dadosDoUsuario: CriaUsuarioDTO) {
+  async criaUsuario(@Body({ schema: criaUsuarioSchema }) dadosDoUsuario: CriaUsuarioDTO) {
 
 
     const usuarioEntity = new UsuarioEntity()
@@ -28,7 +35,7 @@ export class UsuarioController {
     usuarioEntity.senha = dadosDoUsuario.senha
     usuarioEntity.id = randomUUID()
 
-    const response = await this.usuarioRepository.salvar(usuarioEntity)
+    const response = await this.usuarioService.criaUsuario(usuarioEntity)
     return {
       usuario: new ListaUsuarioDTO(response.id, response.nome)
     }
@@ -37,24 +44,15 @@ export class UsuarioController {
 
   @Get()
   async listarUsuarios() {
-    const usuariosSalvos = await this.usuarioRepository.listar()
-    const listaDeUsuariosFormatada = usuariosSalvos.map(usuario => {
-      return new ListaUsuarioDTO(
-        usuario.id, usuario.nome
-      )
-    })
-    return { usuarios: listaDeUsuariosFormatada }
+    const usuarios = await this.usuarioService.listaUsuarios()
+    return { usuarios }
   }
-  @Get(':id')
-  async listarUsuariosId(@Param('id', ParseIntPipe) id: number) {
-    const response = await this.usuarioRepository.listar()
-    return { usuarios: response }
-  }
+
 
 
   @Put(':id')
   async atualizaUsuario(@Param('id') id: string, @Body() novosDados: AtualizaUsuarioDTO) {
-    const usuarioAtualizado = await this.usuarioRepository.atualiza(id, novosDados)
+    const usuarioAtualizado = await this.usuarioService.atualizaUsuario(id, novosDados)
     return {
       usuario: usuarioAtualizado,
       message: 'usuario atualizado com sucesso'
@@ -62,7 +60,7 @@ export class UsuarioController {
   }
   @Delete(':id')
   async removeUsuario(@Param('id') id: string) {
-    const mensagemUsuarioRemovido = await this.usuarioRepository.remove(id)
+    const mensagemUsuarioRemovido = await this.usuarioService.deletaUsuario(id)
     return {
       message: mensagemUsuarioRemovido
     }

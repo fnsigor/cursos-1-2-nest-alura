@@ -12,8 +12,13 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { CategoriaUnica } from '../validacao/categoria-unica.validator.js';
+import { UsuarioExiste } from '../validacao/usuario-existe.validator.js';
+import { ProdutoEntity } from '../produto.entity.js';
 
 export class CaracteristicaProdutoDTO {
+
+  id: string
+
   @IsString()
   @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
   nome: string;
@@ -21,15 +26,22 @@ export class CaracteristicaProdutoDTO {
   @IsString()
   @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
   descricao: string;
+
+  produto: ProdutoEntity
 }
 
 export class ImagemProdutoDTO {
+
+  id: string
+
   @IsUrl(undefined, { message: 'URL Inválida' })
   url: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
   descricao: string;
+
+  produto: ProdutoEntity
 }
 
 export class CriaProdutoDTO {
@@ -51,17 +63,17 @@ export class CriaProdutoDTO {
   })
   descricao: string;
 
-  @ValidateNested()
-  @IsArray()
-  @ArrayMinSize(3)
-  @Type(() => CaracteristicaProdutoDTO)
-  caracteristicas: CaracteristicaProdutoDTO[];
+  // @ValidateNested()
+  // @IsArray()
+  // @ArrayMinSize(3)
+  // @Type(() => CaracteristicaProdutoDTO)
+  // caracteristicas: CaracteristicaProdutoDTO[];
 
-  @ValidateNested()
-  @IsArray()
-  @ArrayMinSize(1)
-  @Type(() => ImagemProdutoDTO)
-  imagens: ImagemProdutoDTO[];
+  // @ValidateNested()
+  // @IsArray()
+  // @ArrayMinSize(1)
+  // @Type(() => ImagemProdutoDTO)
+  // imagens: ImagemProdutoDTO[];
 
   @IsString()
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })
@@ -69,5 +81,6 @@ export class CriaProdutoDTO {
   categoria: string;
 
   @IsUUID(undefined, { message: 'ID de usuário inválido' })
+  @UsuarioExiste({ message: 'usuário nao existe' })
   usuarioId: string;
 }

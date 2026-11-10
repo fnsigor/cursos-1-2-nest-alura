@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm";
+import { ProdutoCaracteristicaEntity } from "./produto-caracteristica.entity.js";
+import { ProdutoImagemEntity } from "./produto-imagens.entity.js";
 
 
 @Entity({ name: 'produtos' })
@@ -34,7 +36,19 @@ export class ProdutoEntity {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string
 
+  @OneToMany(() =>
+    ProdutoCaracteristicaEntity,
+    produtoCaracteristicaEntity => produtoCaracteristicaEntity.produto,
+    { cascade: true, eager: true }
+    //eager traz os dados de caracteristicas relacionadas quando o produto for consultado
+  )
+  caracteristicas: ProdutoCaracteristicaEntity[];
 
-  // caracteristicas: CaracteristicaProduto[];
-  // imagens: ImagemProduto[];
+
+  @OneToMany(() =>
+    ProdutoImagemEntity,
+    produtoImagemEntity => produtoImagemEntity.produto,
+    { cascade: true, eager: true }
+  )
+  imagens: ProdutoImagemEntity[];
 }

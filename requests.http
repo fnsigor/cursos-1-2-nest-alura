@@ -2,8 +2,8 @@ POST http://localhost:3000/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Chopper",
-    "email": "robin@gmail.com",
+    "nome": "Nami",
+    "email": "nami@gmail.com",
     "senha": "8544"
 
 }
@@ -17,12 +17,11 @@ Content-Type: application/json
 
 
 
-PUT http://localhost:3000/usuarios/d18dacad-f487-4ec3-b0d8-097a1cbeabde
+PUT http://localhost:3000/usuarios/f8e73b75-4e67-4c83-97c2-57cf323a68b0
 Content-Type: application/json
 
 {
-    "nome": "Nami",
-    "email": "namiswan@gmail.com"
+    "nome": "Tony Tony Chopper"
 
 }
 
@@ -30,7 +29,7 @@ Content-Type: application/json
 ###
 
 
-DELETE  http://localhost:3000/usuarios/4028adfc-9309-4337-8137-67b42b5ab479
+DELETE  http://localhost:3000/usuarios/9a08e27c-dcbb-4ab4-a93c-2833e8c83918
 Content-Type: application/json
 
 ###
@@ -47,20 +46,20 @@ Content-Type: application/json
 
 {
     "nome": "Teclado Mecânico RGB",
-    "valor": 349.90,
+    "valor": 349,
     "quantidade": 25,
     "descricao": "Teclado mecânico gamer com iluminação RGB, switches azuis e layout ABNT2.",
-    "caracteristicas": [
-        { "nome": "Switch", "descricao": "Switch mecânico azul com feedback tátil e sonoro" },
-        { "nome": "Iluminação", "descricao": "Retroiluminação RGB com 16 milhões de cores" },
-        { "nome": "Layout", "descricao": "Layout ABNT2 com acentuação em português" }
-    ],
-    "imagens": [
-        { "url": "https://exemplo.com/imagens/teclado-frente.jpg", "descricao": "Foto frontal do teclado" },
-        { "url": "https://exemplo.com/imagens/teclado-lado.jpg", "descricao": "Foto lateral do teclado" }
-    ],
+    # "caracteristicas": [
+    #     { "nome": "Switch", "descricao": "Switch mecânico azul com feedback tátil e sonoro" },
+    #     { "nome": "Iluminação", "descricao": "Retroiluminação RGB com 16 milhões de cores" },
+    #     { "nome": "Layout", "descricao": "Layout ABNT2 com acentuação em português" }
+    # ],
+    # "imagens": [
+    #     { "url": "https://exemplo.com/imagens/teclado-frente.jpg", "descricao": "Foto frontal do teclado" },
+    #     { "url": "https://exemplo.com/imagens/teclado-lado.jpg", "descricao": "Foto lateral do teclado" }
+    # ],
     "categoria": "Teclados Gamer",
-    "usuarioId": "7e543348-0929-4752-976d-31c221725691"
+    "usuarioId": "f8e73b75-4e67-4c83-97c2-57cf323a68b0"
 }
 
 ###
