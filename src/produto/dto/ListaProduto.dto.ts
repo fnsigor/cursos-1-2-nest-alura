@@ -10,7 +10,7 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
-import { CaracteristicaProdutoDTO, ImagemProdutoDTO } from './CriaProduto.dto.js';
+import { CaracteristicaProdutoDTO, ImagemProdutoDTO } from './CriaProduto.dto';
 
 export class AtualizaProdutoDTO {
   @IsUUID(undefined, { message: 'ID do produto inválido' })

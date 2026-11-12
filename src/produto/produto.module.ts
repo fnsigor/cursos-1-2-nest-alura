@@ -1,16 +1,18 @@
 import { Module } from "@nestjs/common";
-import { ProdutoController } from "./produto.controller.js";
-import { ProdutoRepository } from "./produto.repository.js";
-import { CategoriaUnicaValidator } from "./validacao/categoria-unica.validator.js";
+import { ProdutoController } from "./produto.controller";
+import { ProdutoRepository } from "./produto.repository";
+import { CategoriaUnicaValidator } from "./validacao/categoria-unica.validator";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ProdutoEntity } from "./produto.entity.js";
-import { ProdutoService } from "./produto.service.js";
-import { UsuarioExisteValidator } from "./validacao/usuario-existe.validator.js";
-import { UsuarioService } from "../usuario/usuario.service.js";
-import { UsuarioEntity } from "../usuario/usuario.entity.js";
+import { ProdutoEntity } from "./produto.entity";
+import { ProdutoCaracteristicaEntity } from "./produto-caracteristica.entity";
+import { ProdutoImagemEntity } from "./produto-imagens.entity";
+import { ProdutoService } from "./produto.service";
+import { UsuarioExisteValidator } from "./validacao/usuario-existe.validator";
+import { UsuarioService } from "../usuario/usuario.service";
+import { UsuarioEntity } from "../usuario/usuario.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProdutoEntity]), TypeOrmModule.forFeature([UsuarioEntity])],
+  imports: [TypeOrmModule.forFeature([ProdutoEntity, ProdutoCaracteristicaEntity, ProdutoImagemEntity]), TypeOrmModule.forFeature([UsuarioEntity])],
   controllers: [ProdutoController],
   providers: [
     ProdutoRepository,

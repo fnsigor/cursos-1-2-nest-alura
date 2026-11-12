@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm";
-import { ProdutoCaracteristicaEntity } from "./produto-caracteristica.entity.js";
-import { ProdutoImagemEntity } from "./produto-imagens.entity.js";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, type Relation } from "typeorm";
+import { ProdutoCaracteristicaEntity } from "./produto-caracteristica.entity";
+import { ProdutoImagemEntity } from "./produto-imagens.entity";
 
 
 @Entity({ name: 'produtos' })
@@ -18,8 +18,8 @@ export class ProdutoEntity {
   @Column({ name: 'valor', nullable: false })
   valor: number;
 
-  @Column({ name: 'quantidade', nullable: false })
-  quantidade: number;
+  @Column({ name: 'quantidade_disponivel', nullable: false })
+  quantidadeDisponivel: number;
 
   @Column({ name: 'descricao', length: 255, nullable: false })
   descricao: string;
@@ -42,7 +42,7 @@ export class ProdutoEntity {
     { cascade: true, eager: true }
     //eager traz os dados de caracteristicas relacionadas quando o produto for consultado
   )
-  caracteristicas: ProdutoCaracteristicaEntity[];
+  caracteristicas: Relation<ProdutoCaracteristicaEntity>[];
 
 
   @OneToMany(() =>
@@ -50,5 +50,5 @@ export class ProdutoEntity {
     produtoImagemEntity => produtoImagemEntity.produto,
     { cascade: true, eager: true }
   )
-  imagens: ProdutoImagemEntity[];
+  imagens: Relation<ProdutoImagemEntity>[];
 }

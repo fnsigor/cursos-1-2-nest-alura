@@ -11,9 +11,9 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
-import { CategoriaUnica } from '../validacao/categoria-unica.validator.js';
-import { UsuarioExiste } from '../validacao/usuario-existe.validator.js';
-import { ProdutoEntity } from '../produto.entity.js';
+import { CategoriaUnica } from '../validacao/categoria-unica.validator';
+import { UsuarioExiste } from '../validacao/usuario-existe.validator';
+import { ProdutoEntity } from '../produto.entity';
 
 export class CaracteristicaProdutoDTO {
 
@@ -54,7 +54,7 @@ export class CriaProdutoDTO {
 
   @IsNumber()
   @Min(0, { message: 'Quantidade mínima inválida' })
-  quantidade: number;
+  quantidadeDisponivel: number;
 
   @IsString()
   @IsNotEmpty({ message: 'Descrição do produto não pode ser vazia ' })
@@ -63,17 +63,17 @@ export class CriaProdutoDTO {
   })
   descricao: string;
 
-  // @ValidateNested()
-  // @IsArray()
-  // @ArrayMinSize(3)
-  // @Type(() => CaracteristicaProdutoDTO)
-  // caracteristicas: CaracteristicaProdutoDTO[];
+  @ValidateNested()
+  @IsArray()
+  @ArrayMinSize(3)
+  @Type(() => CaracteristicaProdutoDTO)
+  caracteristicas: CaracteristicaProdutoDTO[];
 
-  // @ValidateNested()
-  // @IsArray()
-  // @ArrayMinSize(1)
-  // @Type(() => ImagemProdutoDTO)
-  // imagens: ImagemProdutoDTO[];
+  @ValidateNested()
+  @IsArray()
+  @ArrayMinSize(1)
+  @Type(() => ImagemProdutoDTO)
+  imagens: ImagemProdutoDTO[];
 
   @IsString()
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })

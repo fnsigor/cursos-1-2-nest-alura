@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common"
-import { UsuarioEntity } from "./usuario.entity.js"
+import { UsuarioEntity } from "./usuario.entity"
 
 @Injectable() //esse decorator torna a classe um provider, que pode se refrenciado em um modulo para que outras classes possam usar
 export class UsuarioRepository {

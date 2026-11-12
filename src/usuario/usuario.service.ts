@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto.js";
-import { UsuarioEntity } from "./usuario.entity.js";
+import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto";
+import { UsuarioEntity } from "./usuario.entity";
 import { Repository } from "typeorm";
-import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto.js";
+import type { CriaUsuarioDTO } from "./dto/CriaUsuario.dto";
+import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto";
 
 @Injectable()
 export class UsuarioService {
@@ -24,9 +25,14 @@ export class UsuarioService {
     return usuariosLista
   }
 
-  async criaUsuario(usuarioEntity: UsuarioEntity) {
-    const novoUsuario = await this.usuarioRepository.save(usuarioEntity)
-    return novoUsuario
+  async criaUsuario(dadosDoUsuario: CriaUsuarioDTO) {
+    const usuarioEntity = new UsuarioEntity()
+
+    usuarioEntity.email = dadosDoUsuario.email
+    usuarioEntity.senha = dadosDoUsuario.senha
+    usuarioEntity.nome = dadosDoUsuario.nome
+
+    return this.usuarioRepository.save(usuarioEntity)
   }
 
 

@@ -1,11 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from "@nestjs/common";
-import { UsuarioRepository } from "./usuario.repository.js";
-import { criaUsuarioSchema, type CriaUsuarioDTO } from "./dto/CriaUsuario.dto.js";
-import { UsuarioEntity } from "./usuario.entity.js";
-import { randomUUID } from "crypto";
-import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto.js";
-import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto.js";
-import { UsuarioService } from "./usuario.service.js";
+import { UsuarioRepository } from "./usuario.repository";
+import { criaUsuarioSchema, type CriaUsuarioDTO } from "./dto/CriaUsuario.dto";
+import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto";
+import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto";
+import { UsuarioService } from "./usuario.service";
 
 
 @Controller('/usuarios')
@@ -29,15 +27,10 @@ export class UsuarioController {
   async criaUsuario(@Body({ schema: criaUsuarioSchema }) dadosDoUsuario: CriaUsuarioDTO) {
 
 
-    const usuarioEntity = new UsuarioEntity()
-    usuarioEntity.nome = dadosDoUsuario.nome
-    usuarioEntity.email = dadosDoUsuario.email
-    usuarioEntity.senha = dadosDoUsuario.senha
-    usuarioEntity.id = randomUUID()
-
-    const response = await this.usuarioService.criaUsuario(usuarioEntity)
+    const usuarioCriado = await this.usuarioService.criaUsuario(dadosDoUsuario)
     return {
-      usuario: new ListaUsuarioDTO(response.id, response.nome)
+      usuario: new ListaUsuarioDTO(usuarioCriado.id, usuarioCriado.nome),
+      messagem: 'usuário criado com sucesso',
     }
   }
 

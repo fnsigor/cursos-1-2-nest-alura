@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
-import { ProdutoRepository } from "../produto.repository.js";
+import { ProdutoRepository } from "../produto.repository";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()

@@ -1,5 +1,5 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { ProdutoEntity } from "./produto.entity.js";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
+import { ProdutoEntity } from "./produto.entity";
 
 @Entity({ name: 'produto_caracteristicas' })
 export class ProdutoCaracteristicaEntity {
@@ -22,6 +22,6 @@ export class ProdutoCaracteristicaEntity {
       orphanedRowAction: 'delete'
     }
   )
-  produto: ProdutoEntity
+  produto: Relation<ProdutoEntity>
 
 }

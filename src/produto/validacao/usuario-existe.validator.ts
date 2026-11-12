@@ -1,6 +1,6 @@
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 import { Injectable } from "@nestjs/common";
-import { UsuarioService } from "../../usuario/usuario.service.js";
+import { UsuarioService } from "../../usuario/usuario.service";
 
 @Injectable()
 @ValidatorConstraint({ async: true })//é obrigado a infomrar pra esse decorator que é async
