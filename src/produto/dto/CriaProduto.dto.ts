@@ -7,6 +7,7 @@ import {
   IsString,
   IsUrl,
   IsUUID,
+  IsOptional,
   MaxLength,
   Min,
   ValidateNested,
@@ -66,12 +67,14 @@ export class CriaProdutoDTO {
   @ValidateNested()
   @IsArray()
   @ArrayMinSize(3)
+  @IsOptional()
   @Type(() => CaracteristicaProdutoDTO)
   caracteristicas: CaracteristicaProdutoDTO[];
 
   @ValidateNested()
   @IsArray()
   @ArrayMinSize(1)
+  @IsOptional()
   @Type(() => ImagemProdutoDTO)
   imagens: ImagemProdutoDTO[];
 

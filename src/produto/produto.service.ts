@@ -1,5 +1,5 @@
 import { InjectRepository } from "@nestjs/typeorm";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { ProdutoEntity } from "./produto.entity";
 import { Repository } from "typeorm";
 import { CriaProdutoDTO } from "./dto/CriaProduto.dto";
@@ -26,5 +26,19 @@ export class ProdutoService {
     produtoEntity.imagens = dadosProduto.imagens;
 
     return this.produtoRepository.save(produtoEntity);
+  }
+
+  async listaTodos() {
+    return this.produtoRepository.find();
+  }
+
+  async buscaPorId(id: string) {
+    const produto = await this.produtoRepository.findOneBy({ id });
+
+    if (!produto) {
+      throw new NotFoundException('Produto não encontrado');
+    }
+
+    return produto;
   }
 }

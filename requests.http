@@ -47,7 +47,7 @@ Content-Type: application/json
 {
     "nome": "Teclado Mecânico RGB",
     "valor": 349,
-    "quantidade": 25,
+    "quantidadeDisponivel": 25,
     "descricao": "Teclado mecânico gamer com iluminação RGB, switches azuis e layout ABNT2.",
     # "caracteristicas": [
     #     { "nome": "Switch", "descricao": "Switch mecânico azul com feedback tátil e sonoro" },
@@ -65,4 +65,9 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/produtos
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/produtos/a66acf29-ed2f-4e3c-9aa3-c728ccd65e9c
 Content-Type: application/json

@@ -34,7 +34,13 @@ export class ProdutoController {
 
   @Get()
   async listaTodos() {
-    return this.produtoRepository.listaTodos();
+    return this.produtoService.listaTodos();
+  }
+
+  @Get('/:id')
+  async buscaPorId(@Param('id') id: string) {
+    const produto = await this.produtoService.buscaPorId(id);
+    return { produto };
   }
 
   @Put('/:id')
