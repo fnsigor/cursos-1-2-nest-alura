@@ -1,0 +1,7 @@
+ao criar uma primeira migration, é criado no banco uma tabela migrations. essa tabela armazena a informação das migratiosn executadas
+
+com a informação dessa tabela, a cli da orm consegue identificar qual a ultima migration executada
+
+os metodos up e down adicionam ou removem (com delete de verdade, sem softdelete) as migrations dessa tabela
+
+-----------------------------
