@@ -2,8 +2,8 @@ POST http://localhost:3000/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Nami",
-    "email": "nami@gmail.com",
+    "nome": "Jinbei",
+    "email": "jibeimugiwara@gmail.com",
     "senha": "8544"
 
 }
@@ -29,7 +29,7 @@ Content-Type: application/json
 ###
 
 
-DELETE  http://localhost:3000/usuarios/9a08e27c-dcbb-4ab4-a93c-2833e8c83918
+DELETE  http://localhost:3000/usuarios/b4d9457d-df0c-40e3-900f-f6e98bb9c722
 Content-Type: application/json
 
 ###
@@ -71,3 +71,17 @@ Content-Type: application/json
 
 GET http://localhost:3000/produtos/a723ff8c-c39a-440a-8208-860ee617c3c9
 Content-Type: application/json
+
+
+
+
+
+###
+
+POST  http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "jibeimugiwara@gmail.com",
+    "senha": "8544"
+}

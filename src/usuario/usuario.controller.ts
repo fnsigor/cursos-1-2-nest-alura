@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from "@nestjs/common";
-import { UsuarioRepository } from "./usuario.repository";
 import { criaUsuarioSchema, type CriaUsuarioDTO } from "./dto/CriaUsuario.dto";
 import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto";
 import { AtualizaUsuarioDTO } from "./dto/AtualizaUsuario.dto";
 import { UsuarioService } from "./usuario.service";
+import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
 
 
 @Controller('/usuarios')
@@ -24,10 +24,15 @@ export class UsuarioController {
   // }
 
   @Post()
-  async criaUsuario(@Body({ schema: criaUsuarioSchema }) dadosDoUsuario: CriaUsuarioDTO) {
+  async criaUsuario(
+    @Body({ schema: criaUsuarioSchema }) { senha, ...dadosDoUsuario }: CriaUsuarioDTO,
+    @Body('senha', HashearSenhaPipe) senhaHasheada: string) {
+    console.log({ senhaHasheada })
 
 
-    const usuarioCriado = await this.usuarioService.criaUsuario(dadosDoUsuario)
+    const usuarioCriado = await this.usuarioService.criaUsuario({ ...dadosDoUsuario, senha: senhaHasheada })
+    console.log({ usuarioCriado })
+
     return {
       usuario: new ListaUsuarioDTO(usuarioCriado.id, usuarioCriado.nome),
       messagem: 'usuário criado com sucesso',

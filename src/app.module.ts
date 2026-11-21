@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { createKeyv, Keyv } from '@keyv/redis';
 import { KeyvCacheableMemory } from 'cacheable';
+import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module.js';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { KeyvCacheableMemory } from 'cacheable';
           ],
         };
       }
-    })
+    }),
+    AutenticacaoModule
   ],
 
 

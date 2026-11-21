@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
@@ -49,6 +49,19 @@ export class UsuarioService {
     const usuario = await this.usuarioRepository.findOneBy({
       id
     })
+
+    if (!usuario) throw new NotFoundException('O usuário não foi encontrado.');
+
+
+    return usuario
+  }
+  async buscaPorEmail(email: string) {
+    const usuario = await this.usuarioRepository.findOneBy({
+      email
+    })
+
+    if (!usuario) throw new NotFoundException('O email não foi encontrado.');
+
 
     return usuario
   }

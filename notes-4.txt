@@ -6,3 +6,98 @@ em seguida, fazemos o passo a passo que o interceptor ja realiza: ve se tem no c
 a diferença entre modulos estaticos (usuarioModulue, PRODUTOmODULE) pra modulos dinamicos,
 é que nos modulos dinamicos podemos usar as funções forRoot, forRootAsync e registerAsync pra passar isntruções quando esses modulos forem importados.
 essas instruções tambem podem ser personalziadas dependendo de quem importa o modulo
+
+
+pipes notmalmente tem 2 tipos: transformação e validação.
+nesse app implementamos algumas pipes de validação, com o zod e com a lib class-validator. 
+pipes podem executar sobre a request como um todo ou sobre parametros de query ou body especificos. a pipe hashear-senha opera sobre um parametro de body especifico.
+
+
+
+-----------------------
+
+
+
+a linha
+```
+providers: [AutenticacaoService],
+```
+
+por baixo dos panos é a mesma coisa que 
+
+```
+  providers: [
+    {
+      provide: AutenticacaoService,
+      useClass: AutenticacaoService,
+    },
+  ],
+```
+
+"provide" é a classe que recebe Injectable() é declarada como dependencia em controllers e estaticos
+"useClass" é a classe que de fato vai ser instanciada
+
+observe o exemplo:
+
+```
+  providers: [
+    {
+      provide: AutenticacaoService,
+      useClass: ClasseASerIntanciada,
+    },
+  ],
+```
+
+uma pipe pode declarar como depdencia a classe AutenticacaoService, mas quem de fato vai ser instanciada é a classe ClasseASerIntanciada
+
+esse controle dos providers pode ser util em variso casos, como clsses fake pra usar mocks.
+
+
+
+
+
+
+
+
+
+Token não baseado em classe:
+
+tambem podemos substituir os token por strings ao inves de classes
+```
+  providers: [
+    {
+      provide: 'MEU_TOKEN',
+      useValue: {
+        login: () => {
+          // código qualquer...
+        },
+      },
+    },
+  ],
+```
+
+dessa forma, a injeção de dependencia ficaria assim
+```
+@Controller('autenticacao')
+export class AutenticacaoController {
+  constructor(@Inject('MEU_TOKEN') private readonly autenticacaoService) {}
+
+  // código omitido...
+}
+```
+
+O valor em "provider" não é uma mera classe, e sim um token. As classes colocadas como valor nessa prop são tokens, e as classes que vão ser instanciadas são as da prop "useClass". Essa associação se chama registration.
+
+
+podemos substituir classes que seriam injetadas por um valor literal, atraves da troca de useClass por useValue
+
+Utilizar tokens de string em conjunto com o @Inject permite uma maior flexibilidade no uso de provedores, principalmente quando estamos lidando com libs já prontas. 
+no controler de produto, usamos o token personalizado CACHE_MANAGER pra manipular o comportamento do redis
+
+Além de strings, symbols do JavaScript e enums do TypeScript podem ser utilizados como tokens não baseados em classe.
+
+----------------------------------------
+
+//para que algum provider (qualquer classe com Injectable()) de um modulo seja reutilizado em outro modulo
+//no modulo de origem do provider, esse provder deve ser colocado na array de exports
+//o outro modulo vai importar o provider exportado colocado na array de imports
