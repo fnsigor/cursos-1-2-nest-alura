@@ -1,0 +1,8 @@
+interceptores podem executar codigo antes ou depois da request passar por um controller
+
+pra personalizar o que vai no cache de uma rota ou não, importamos o cache da lib cache-manager e o  CACHE_MANAGER da lib @nestjs/cache-manager;
+em seguida, fazemos o passo a passo que o interceptor ja realiza: ve se tem no cache, se ja tiver retorna, se nao tiver busca o dado, coloca no cache e retorna. nao esqueca de remover o interceptor se vai persoanliar o cache.
+
+a diferença entre modulos estaticos (usuarioModulue, PRODUTOmODULE) pra modulos dinamicos,
+é que nos modulos dinamicos podemos usar as funções forRoot, forRootAsync e registerAsync pra passar isntruções quando esses modulos forem importados.
+essas instruções tambem podem ser personalziadas dependendo de quem importa o modulo

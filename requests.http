@@ -69,5 +69,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/produtos/a66acf29-ed2f-4e3c-9aa3-c728ccd65e9c
+GET http://localhost:3000/produtos/a723ff8c-c39a-440a-8208-860ee617c3c9
 Content-Type: application/json
