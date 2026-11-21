@@ -43,6 +43,7 @@ Content-Type: application/json
 
 POST http://localhost:3000/produtos
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZWM4MGFmZS01NmM5LTQ4YjYtOGYyOS04MDAxY2YzNDUwYmQiLCJub21lVXN1YXJpbyI6IkppbmJlaSIsImlhdCI6MTc5NTMwMjY2NywiZXhwIjoxNzk1NTYxODY3fQ.v_4vF2lt_t01fM_N94LDecVzvY7owntN7Hezoq0xtiI
 
 {
     "nome": "Teclado Mecânico RGB",
@@ -66,10 +67,12 @@ Content-Type: application/json
 
 GET http://localhost:3000/produtos
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZWM4MGFmZS01NmM5LTQ4YjYtOGYyOS04MDAxY2YzNDUwYmQiLCJub21lVXN1YXJpbyI6IkppbmJlaSIsImlhdCI6MTc5NTMwMjY2NywiZXhwIjoxNzk1NTYxODY3fQ.v_4vF2lt_t01fM_N94LDecVzvY7owntN7Hezoq0xtiI
+
 
 ###
 
-GET http://localhost:3000/produtos/a723ff8c-c39a-440a-8208-860ee617c3c9
+GET http://localhost:3000/produtos/a723ff8c-c39a-440a-8208-860ee617c3c9s
 Content-Type: application/json
 
 

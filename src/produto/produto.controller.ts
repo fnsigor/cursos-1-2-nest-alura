@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProdutoRepository } from './produto.repository';
@@ -16,8 +17,9 @@ import { ProdutoService } from './produto.service';
 import { CACHE_MANAGER, CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
 import { ProdutoEntity } from './produto.entity';
+import { AutenticacaoGuard } from '../modulos/autenticacao/autenticacao/autenticacao.guard';
 
-
+@UseGuards(AutenticacaoGuard)//um guard no controler afeta todas as rotas
 @Controller('produtos')
 export class ProdutoController {
   constructor(
@@ -27,6 +29,7 @@ export class ProdutoController {
   ) { }
 
   @Post()
+  //@UseGuards(AutenticacaoGuard) um guard numa rota afeta só a rota
   async criaNovo(@Body() dadosProduto: CriaProdutoDTO) {
     const produtoCadastrado = await this.produtoService.criaProduto(
       dadosProduto,
